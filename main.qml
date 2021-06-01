@@ -11,6 +11,8 @@ Window {
     visible: true
     title: qsTr("Dialpad")
 
+    property int numberOfMessages: 0
+
     Image {
         anchors.fill: parent
         horizontalAlignment: Image.AlignHCenter
@@ -237,6 +239,12 @@ Window {
 
                 MouseArea {
                     anchors.fill: parent
+
+                    onClicked: {
+                        numberOfMessages++
+                        messageText.clear()
+                    }
+
                     onPressed: {
                         sendButtonImage.source = "qrc:/resources/btn_white_down.png"
                     }
@@ -264,7 +272,7 @@ Window {
         Text {
             id: charactersLeftText
             width: parent.width
-            text: messageText.maximumLength - messageText.length + "/160";
+            text: messageText.maximumLength - messageText.length + "/" + numberOfMessages.toString();
             horizontalAlignment: Text.AlignRight
             rightPadding: 4
             textFormat: Text.RichText
